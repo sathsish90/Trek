@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Cybersecurity House — Interactive Ecosystem MVP</title>
+    <meta
+      name="description"
+      content="An interactive house-themed cybersecurity ecosystem: training, labs, mentorship, jobs, hiring, partners, products, and services."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#house">Skip to the house</a>
+
+    <header class="topbar" role="banner">
+      <div class="topbar__left">
+        <div class="brand" aria-label="Cybersecurity House">
+          <span class="brand__mark" aria-hidden="true">CH</span>
+          <div class="brand__text">
+            <div class="brand__name">Cybersecurity House</div>
+            <div class="brand__tag">Explore. Learn. Build. Hire. Ship.</div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="topbar__right" aria-label="Primary">
+        <a class="chip" href="#pricing">Pricing</a>
+        <button class="chip" id="tourBtn" type="button">Guided tour</button>
+        <button class="chip chip--primary" id="contactBtn" type="button">Talk to us</button>
+      </nav>
+    </header>
+
+    <main class="shell" role="main">
+      <section class="hero" aria-label="Intro">
+        <div class="hero__copy">
+          <h1 class="hero__title">
+            A house you can click into — where every room is a cybersecurity outcome.
+          </h1>
+          <p class="hero__subtitle">
+            Training, hands-on labs, mentorship, career placements, hiring, partners, and products —
+            designed as an interactive ecosystem.
+          </p>
+
+          <div class="hero__ctas">
+            <button class="btn btn--primary" id="enterBtn" type="button">Enter the house</button>
+            <button class="btn" id="personaBtn" type="button">Choose a path</button>
+          </div>
+
+          <div class="hero__proof" aria-label="Proof">
+            <div class="proof">
+              <div class="proof__num">2 min</div>
+              <div class="proof__label">to try a lab</div>
+            </div>
+            <div class="proof">
+              <div class="proof__num">1 CTA</div>
+              <div class="proof__label">per room (no clutter)</div>
+            </div>
+            <div class="proof">
+              <div class="proof__num">3 lanes</div>
+              <div class="proof__label">Self-serve / High-touch / Pipeline</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__preview" aria-label="House preview">
+          <div class="mini" role="img" aria-label="A stylized cyber house preview">
+            <div class="mini__glow" aria-hidden="true"></div>
+            <div class="mini__card">
+              <div class="mini__title">Click rooms → open offers</div>
+              <div class="mini__sub">Fast, responsive, and conversion-ready.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="house" id="house" aria-label="Interactive house">
+        <div class="house__left">
+          <div class="house__toolbar" aria-label="House toolbar">
+            <button class="pill" id="mapToggle" type="button">Mini-map</button>
+            <div class="divider" aria-hidden="true"></div>
+            <div class="seg" role="group" aria-label="Persona">
+              <button class="seg__btn" type="button" data-persona="all" aria-pressed="true">All</button>
+              <button class="seg__btn" type="button" data-persona="learner" aria-pressed="false">Learner</button>
+              <button class="seg__btn" type="button" data-persona="hiring" aria-pressed="false">Hiring</button>
+              <button class="seg__btn" type="button" data-persona="business" aria-pressed="false">Business</button>
+              <button class="seg__btn" type="button" data-persona="partner" aria-pressed="false">Partner</button>
+            </div>
+          </div>
+
+          <div class="house__canvas" id="houseCanvas">
+            <div class="hint" id="houseHint">Tip: click any room. Press <kbd>Esc</kbd> to close.</div>
+
+            <svg
+              class="dollhouse"
+              viewBox="0 0 960 620"
+              role="img"
+              aria-label="A house with clickable rooms"
+            >
+              <defs>
+                <linearGradient id="roof" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#5b2cff" stop-opacity="0.85" />
+                  <stop offset="1" stop-color="#00d4ff" stop-opacity="0.55" />
+                </linearGradient>
+                <linearGradient id="walls" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#0c1226" />
+                  <stop offset="1" stop-color="#070a14" />
+                </linearGradient>
+                <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="7" result="b" />
+                  <feColorMatrix
+                    in="b"
+                    type="matrix"
+                    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 12 -6"
+                    result="g"
+                  />
+                  <feMerge>
+                    <feMergeNode in="g" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <!-- Roof -->
+              <polygon class="house__roof" points="480,40 120,210 840,210" fill="url(#roof)" />
+
+              <!-- Outer shell -->
+              <rect x="120" y="210" width="720" height="360" rx="24" fill="url(#walls)" class="house__shell" />
+
+              <!-- Rooms row 1 -->
+              <g class="room" data-room="gallery" tabindex="0" role="button" aria-label="Gallery: proof wall">
+                <rect x="150" y="240" width="210" height="130" rx="18" class="room__shape" />
+                <text x="255" y="308" class="room__label">Gallery</text>
+                <text x="255" y="333" class="room__sublabel">Proof wall</text>
+              </g>
+
+              <g class="room" data-room="foyer" tabindex="0" role="button" aria-label="Foyer: start here">
+                <rect x="375" y="240" width="210" height="130" rx="18" class="room__shape" />
+                <text x="480" y="308" class="room__label">Foyer</text>
+                <text x="480" y="333" class="room__sublabel">Start here</text>
+              </g>
+
+              <g class="room" data-room="boardroom" tabindex="0" role="button" aria-label="Boardroom: hiring and assessments">
+                <rect x="600" y="240" width="210" height="130" rx="18" class="room__shape" />
+                <text x="705" y="308" class="room__label">Boardroom</text>
+                <text x="705" y="333" class="room__sublabel">Hiring</text>
+              </g>
+
+              <!-- Rooms row 2 -->
+              <g class="room" data-room="kitchen" tabindex="0" role="button" aria-label="Kitchen: learning paths">
+                <rect x="150" y="385" width="210" height="155" rx="18" class="room__shape" />
+                <text x="255" y="460" class="room__label">Kitchen</text>
+                <text x="255" y="485" class="room__sublabel">Learning</text>
+              </g>
+
+              <g class="room" data-room="lab" tabindex="0" role="button" aria-label="Lab Room: hands-on labs">
+                <rect x="375" y="385" width="210" height="155" rx="18" class="room__shape" />
+                <text x="480" y="460" class="room__label">Lab Room</text>
+                <text x="480" y="485" class="room__sublabel">Hands-on</text>
+              </g>
+
+              <g class="room" data-room="study" tabindex="0" role="button" aria-label="Study: mentorship">
+                <rect x="600" y="385" width="210" height="155" rx="18" class="room__shape" />
+                <text x="705" y="460" class="room__label">Study</text>
+                <text x="705" y="485" class="room__sublabel">Mentorship</text>
+              </g>
+
+              <!-- Rooms row 3 (below house / yard) -->
+              <g class="room" data-room="bathroom" tabindex="0" role="button" aria-label="Bathroom: security hygiene">
+                <rect x="150" y="560" width="210" height="40" rx="14" class="room__shape room__shape--yard" />
+                <text x="255" y="588" class="room__label room__label--yard">Bathroom</text>
+              </g>
+
+              <g class="room" data-room="living" tabindex="0" role="button" aria-label="Living Room: community and events">
+                <rect x="375" y="560" width="210" height="40" rx="14" class="room__shape room__shape--yard" />
+                <text x="480" y="588" class="room__label room__label--yard">Living</text>
+              </g>
+
+              <g class="room" data-room="garden" tabindex="0" role="button" aria-label="Garden: partners and brand">
+                <rect x="600" y="560" width="210" height="40" rx="14" class="room__shape room__shape--yard" />
+                <text x="705" y="588" class="room__label room__label--yard">Garden</text>
+              </g>
+
+              <!-- Basement / Garage / Attic callouts -->
+              <g class="room" data-room="basement" tabindex="0" role="button" aria-label="Basement: simulations and incident response">
+                <rect x="140" y="205" width="160" height="28" rx="14" class="room__tag" />
+                <text x="220" y="225" class="room__tagText">Basement · Simulations</text>
+              </g>
+
+              <g class="room" data-room="garage" tabindex="0" role="button" aria-label="Garage: products and tools">
+                <rect x="650" y="205" width="160" height="28" rx="14" class="room__tag" />
+                <text x="730" y="225" class="room__tagText">Garage · Products</text>
+              </g>
+
+              <g class="room" data-room="attic" tabindex="0" role="button" aria-label="Attic: jobs and placements">
+                <rect x="400" y="175" width="160" height="28" rx="14" class="room__tag" />
+                <text x="480" y="195" class="room__tagText">Attic · Careers</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="roomsList" id="roomsList" aria-label="Rooms list"></div>
+        </div>
+
+        <aside class="panel" id="panel" aria-label="Room details" aria-hidden="true">
+          <div class="panel__header">
+            <div>
+              <div class="panel__kicker" id="panelKicker">Room</div>
+              <h2 class="panel__title" id="panelTitle">Select a room</h2>
+            </div>
+            <button class="iconBtn" id="closePanelBtn" type="button" aria-label="Close panel">✕</button>
+          </div>
+
+          <div class="panel__body" id="panelBody">
+            <p class="muted">Click a room in the house to see what it offers.</p>
+          </div>
+
+          <div class="panel__footer" id="panelFooter"></div>
+        </aside>
+      </section>
+
+      <section class="pricing" id="pricing" aria-label="Pricing">
+        <div class="pricing__head">
+          <h2 class="sectionTitle">Pricing that matches the house</h2>
+          <p class="muted">
+            This MVP uses placeholder prices and CTAs — you can swap them with real offers anytime.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="card__top">
+              <div class="badge">Free</div>
+              <h3>Starter Kit</h3>
+              <p class="muted">Try one lab + download hygiene templates.</p>
+            </div>
+            <div class="card__price">$0</div>
+            <ul class="list">
+              <li>1 guided lab</li>
+              <li>Security hygiene toolkit</li>
+              <li>Workshop invite</li>
+            </ul>
+            <button class="btn btn--primary" data-cta="free">Start free</button>
+          </article>
+
+          <article class="card">
+            <div class="card__top">
+              <div class="badge badge--cool">Popular</div>
+              <h3>Pro Labs</h3>
+              <p class="muted">Hands-on practice + learning paths.</p>
+            </div>
+            <div class="card__price">$99<span class="muted">/mo</span></div>
+            <ul class="list">
+              <li>All labs + challenges</li>
+              <li>Role-based paths</li>
+              <li>Certificates + projects</li>
+            </ul>
+            <button class="btn btn--primary" data-cta="pro">Get Pro</button>
+          </article>
+
+          <article class="card">
+            <div class="card__top">
+              <div class="badge badge--warm">High-touch</div>
+              <h3>Mentor Pack</h3>
+              <p class="muted">Roadmap + reviews + interview prep.</p>
+            </div>
+            <div class="card__price">$299<span class="muted">/pack</span></div>
+            <ul class="list">
+              <li>2 sessions</li>
+              <li>Skill-gap plan</li>
+              <li>Portfolio review</li>
+            </ul>
+            <button class="btn btn--primary" data-cta="mentor">Book mentor</button>
+          </article>
+
+          <article class="card">
+            <div class="card__top">
+              <div class="badge">Teams</div>
+              <h3>Teams + Hiring</h3>
+              <p class="muted">Assess, train, and hire from one pipeline.</p>
+            </div>
+            <div class="card__price">Custom</div>
+            <ul class="list">
+              <li>Assessments + reporting</li>
+              <li>Cohorts + workshops</li>
+              <li>Candidate pipeline</li>
+            </ul>
+            <button class="btn btn--primary" data-cta="teams">Talk to sales</button>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer" role="contentinfo">
+        <div class="muted">
+          MVP: interactive SVG dollhouse + room panel + persona routing + guided tour.
+        </div>
+      </footer>
+    </main>
+
+    <!-- Gate overlay -->
+    <div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Enter the house">
+      <div class="gate__card">
+        <div class="gate__badge">Cyber House</div>
+        <h2 class="gate__title">Click to enter</h2>
+        <p class="gate__sub">
+          Explore rooms like a real home — but each one unlocks a cybersecurity initiative.
+        </p>
+        <div class="gate__actions">
+          <button class="btn btn--primary" id="gateEnter" type="button">Enter now</button>
+          <button class="btn" id="gateTour" type="button">Take a tour</button>
+        </div>
+        <div class="gate__hint muted">Keyboard friendly · Reduced-motion supported</div>
+      </div>
+    </div>
+
+    <!-- Persona modal -->
+    <div class="modal" id="personaModal" role="dialog" aria-modal="true" aria-label="Choose a path" aria-hidden="true">
+      <div class="modal__card">
+        <div class="modal__head">
+          <h2 class="modal__title">Choose your path</h2>
+          <button class="iconBtn" id="closePersona" type="button" aria-label="Close">✕</button>
+        </div>
+        <p class="muted">We’ll highlight the rooms that best match your goal. You can still explore everything.</p>
+
+        <div class="grid">
+          <button class="pick" type="button" data-persona-pick="learner">
+            <div class="pick__title">Learner</div>
+            <div class="pick__sub">Skills → labs → mentorship → placement</div>
+          </button>
+          <button class="pick" type="button" data-persona-pick="hiring">
+            <div class="pick__title">Hiring</div>
+            <div class="pick__sub">Assessments → pipeline → placements</div>
+          </button>
+          <button class="pick" type="button" data-persona-pick="business">
+            <div class="pick__title">Business</div>
+            <div class="pick__sub">Workshops → simulations → services</div>
+          </button>
+          <button class="pick" type="button" data-persona-pick="partner">
+            <div class="pick__title">Partner</div>
+            <div class="pick__sub">Alliances → co-branding → distribution</div>
+          </button>
+        </div>
+
+        <div class="modal__actions">
+          <button class="btn" id="skipPersona" type="button">Skip</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact modal -->
+    <div class="modal" id="contactModal" role="dialog" aria-modal="true" aria-label="Contact" aria-hidden="true">
+      <div class="modal__card">
+        <div class="modal__head">
+          <h2 class="modal__title">Talk to us</h2>
+          <button class="iconBtn" id="closeContact" type="button" aria-label="Close">✕</button>
+        </div>
+
+        <form id="contactForm" class="form">
+          <div class="row">
+            <label class="field">
+              <span class="field__label">Name</span>
+              <input class="input" name="name" autocomplete="name" placeholder="Your name" />
+            </label>
+            <label class="field">
+              <span class="field__label">Email</span>
+              <input class="input" name="email" autocomplete="email" placeholder="you@company.com" />
+            </label>
+          </div>
+
+          <label class="field">
+            <span class="field__label">I’m interested in</span>
+            <select class="input" name="interest">
+              <option value="Free lab">Free lab</option>
+              <option value="Pro labs subscription">Pro labs subscription</option>
+              <option value="Mentorship">Mentorship</option>
+              <option value="Career Accelerator">Career Accelerator</option>
+              <option value="Hiring / Assessments">Hiring / Assessments</option>
+              <option value="Enterprise training / services">Enterprise training / services</option>
+              <option value="Product trial">Product trial</option>
+              <option value="Partnership">Partnership</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="field__label">Message</span>
+            <textarea class="input textarea" name="message" rows="4" placeholder="Tell us what you want to achieve..."></textarea>
+          </label>
+
+          <div class="modal__actions">
+            <button class="btn btn--primary" type="submit">Create email</button>
+            <button class="btn" id="copyEmail" type="button">Copy email text</button>
+          </div>
+
+          <p class="muted" id="contactHint">
+            This MVP doesn’t send data anywhere. It prepares a mailto message you can send.
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
